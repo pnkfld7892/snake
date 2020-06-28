@@ -19,10 +19,12 @@ void Snake::changeDirection(sf::Vector2f dir){
 void Snake::setHeadPosition(char axis,float pos){
     switch(std::tolower(axis)){
         case 'x':
-            snakeHead.setPosition(pos,snakeHead.getPosition().y);
+            position.x = pos;
+            snakeHead.setPosition(position);
             break;
         case 'y':
-            snakeHead.setPosition(snakeHead.getPosition().x,pos);
+            position.y = pos;
+            snakeHead.setPosition(position);
             break;
         default:
             break;

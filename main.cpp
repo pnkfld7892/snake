@@ -50,12 +50,30 @@ int main(){
         
         window.clear(sf::Color(50,50,50));
         snake.update();
-        if((snake.getSnakeHead().getPosition().y/2.0) + snake.getSnakeHead().getSize().x >= window.getSize().y)
+        
+    if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) <= 0)
+        {
+            snake.setHeadPosition('Y', window.getSize().y + snake.getSnakeHead().getSize().y);
+        }
+        
+        if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) >= window.getSize().y)
         {
             snake.setHeadPosition('Y',0);
         }
+        
+        if((snake.getSnakeHead().getPosition().x) + (snake.getSnakeHead().getSize().x/2) <= 0)
+        {
+            snake.setHeadPosition('X',window.getSize().x + snake.getSnakeHead().getSize().x);
+        }
+        
+        if((snake.getSnakeHead().getPosition().x) + (snake.getSnakeHead().getSize().x/2) >= window.getSize().x)
+        {
+            snake.setHeadPosition('X',0);
+        }
+
         window.draw(food.getShape());
         window.draw(snake.getSnakeHead());
         window.display();
     }
 }
+

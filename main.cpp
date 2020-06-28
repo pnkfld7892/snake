@@ -8,7 +8,7 @@
 
 int main(){
     std::cout <<"welcome to snake" << std::endl;
-    sf::RenderWindow window(sf::VideoMode(400,400),"Snake!");
+    sf::RenderWindow window(sf::VideoMode(640,480),"Snake!");
 
         Snake snake; 
         Food food(sf::Vector2f(150,220));
@@ -51,9 +51,10 @@ int main(){
         window.clear(sf::Color(50,50,50));
         snake.update();
         
-    if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) <= 0)
+        if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) <= 0)
         {
-            snake.setHeadPosition('Y', window.getSize().y + snake.getSnakeHead().getSize().y);
+            std::cout<<"snake above screen" << std::endl;
+            snake.setHeadPosition('Y', window.getSize().y - snake.getSnakeHead().getSize().y);
         }
         
         if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) >= window.getSize().y)
@@ -63,17 +64,17 @@ int main(){
         
         if((snake.getSnakeHead().getPosition().x) + (snake.getSnakeHead().getSize().x/2) <= 0)
         {
-            snake.setHeadPosition('X',window.getSize().x + snake.getSnakeHead().getSize().x);
+            snake.setHeadPosition('X',window.getSize().x - snake.getSnakeHead().getSize().x);
         }
         
         if((snake.getSnakeHead().getPosition().x) + (snake.getSnakeHead().getSize().x/2) >= window.getSize().x)
         {
+            std::cout<< "snake off right edge " << std::endl;
             snake.setHeadPosition('X',0);
         }
-
+        
         window.draw(food.getShape());
         window.draw(snake.getSnakeHead());
         window.display();
     }
 }
-

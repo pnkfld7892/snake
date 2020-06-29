@@ -33,13 +33,17 @@ void checkBounds(sf::Vector2u windowSize, Snake* snake)
             snake->setHeadPosition('X',0);
         }
 }
+
+
 int main(){
     std::cout <<"welcome to snake" << std::endl;
     sf::RenderWindow window(sf::VideoMode(640,480),"Snake!");
 
-        Snake snake; 
-        Food food(sf::Vector2f(150,220));
-        snake.changeDirection(sf::Vector2f(1,0));
+    window.setFramerateLimit(60);
+    
+    Snake snake; 
+    Food food(sf::Vector2f(150,220));
+    snake.changeDirection(sf::Vector2f(1,0));
     while (window.isOpen())
     {
         sf::Event event;
@@ -79,6 +83,10 @@ int main(){
         snake.update();
         checkBounds(window.getSize(), &snake);
         
+        if(snake.getSnakeHead().getGlobalBounds().intersects(food.getShape().getGlobalBounds())){
+            food.setPosition(sf::Vector2f(400,140));
+                }
+
         window.draw(food.getShape());
         window.draw(snake.getSnakeHead());
         window.display();

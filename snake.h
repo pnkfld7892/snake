@@ -12,7 +12,7 @@ private:
     sf::RectangleShape snakeHead;
     sf::Vector2f position;
     sf::Vector2f direction;
-    float speed = 0.1f;
+    float speed = 1.0f;
     void move();
 public:
     void changeDirection(sf::Vector2f direction);

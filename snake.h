@@ -19,6 +19,7 @@ public:
     void setHeadPosition(char axis,float pos);
     void update();
     void grow();
+    void increaseSpeed();
     sf::RectangleShape getSnakeHead();
-    std::vector<sf::RectangleShape> getSnakeBody();
+    std::vector<bodyCell> getSnakeBody();
 };

@@ -3,7 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Window.hpp>
 #include <iostream>
-#include <ostream>
+#include <stdlib.h>
 #include "direction.h"
 #include "snake.h"
 #include "food.h"
@@ -84,8 +84,11 @@ int main(){
         checkBounds(window.getSize(), &snake);
         
         if(snake.getSnakeHead().getGlobalBounds().intersects(food.getShape().getGlobalBounds())){
-            food.setPosition(sf::Vector2f(400,140));
-                }
+            food.setPosition(sf::Vector2f(std::rand() % window.getSize().x + 1,std::rand() % window.getSize().y));
+            snake.increaseSpeed();
+            snake.grow();
+        }
+        std::cout<<"The body length is: " << snake.getSnakeBody().size() << std::endl;
 
         window.draw(food.getShape());
         window.draw(snake.getSnakeHead());

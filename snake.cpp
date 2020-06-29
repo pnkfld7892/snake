@@ -1,4 +1,5 @@
 #include "snake.h"
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
 
 //Snake implementation here
@@ -16,6 +17,10 @@ void Snake::changeDirection(sf::Vector2f dir){
     direction = dir;
 }
 
+void Snake::increaseSpeed(){
+    speed += 2;
+}
+
 void Snake::setHeadPosition(char axis,float pos){
     switch(std::tolower(axis)){
         case 'x':
@@ -31,6 +36,9 @@ void Snake::setHeadPosition(char axis,float pos){
     }
 }
 
+void Snake::grow(){
+    snakeBody.push_back(bodyCell(sf::RectangleShape(sf::Vector2f(10,10))));
+}
 
 void Snake::update(){
    position += (direction * speed);
@@ -38,4 +46,7 @@ void Snake::update(){
    snakeHead.setPosition(position);
 }
 
+std::vector<bodyCell> Snake::getSnakeBody(){
 
+    return snakeBody;
+ }

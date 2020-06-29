@@ -13,6 +13,7 @@ class bodyCell{
     sf::Vector2f currentMove;
     sf::Vector2f previousMove;
     public:
+    sf::RectangleShape getShape();
     sf::Vector2f getPreviousMove();
     void setNextMove(sf::Vector2f nextMove);
     sf::Vector2f getPos(); 

@@ -88,10 +88,13 @@ int main(){
             snake.increaseSpeed();
             snake.grow();
         }
-        std::cout<<"The body length is: " << snake.getSnakeBody().size() << std::endl;
 
         window.draw(food.getShape());
         window.draw(snake.getSnakeHead());
+        for (bodyCell cell : snake.getSnakeBody()){
+            window.draw(cell.getShape());
+         }
+
         window.display();
     }
 }

@@ -1,3 +1,5 @@
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Window.hpp>
 #include <iostream>
@@ -6,6 +8,31 @@
 #include "snake.h"
 #include "food.h"
 
+//checks snake against window bounds
+//wraps around if off an edge
+void checkBounds(sf::Vector2u windowSize, Snake* snake)
+{
+        
+        if((snake->getSnakeHead().getPosition().y) + (snake->getSnakeHead().getSize().y/2) <= 0)
+        {
+            snake->setHeadPosition('Y', windowSize.y - snake->getSnakeHead().getSize().y);
+        }
+        
+        if((snake->getSnakeHead().getPosition().y) + (snake->getSnakeHead().getSize().y/2) >= windowSize.y)
+        {
+            snake->setHeadPosition('Y',0);
+        }
+        
+        if((snake->getSnakeHead().getPosition().x) + (snake->getSnakeHead().getSize().x/2) <= 0)
+        {
+            snake->setHeadPosition('X',windowSize.x - snake->getSnakeHead().getSize().x);
+        }
+        
+        if((snake->getSnakeHead().getPosition().x) + (snake->getSnakeHead().getSize().x/2) >= windowSize.x)
+        {
+            snake->setHeadPosition('X',0);
+        }
+}
 int main(){
     std::cout <<"welcome to snake" << std::endl;
     sf::RenderWindow window(sf::VideoMode(640,480),"Snake!");
@@ -50,28 +77,7 @@ int main(){
         
         window.clear(sf::Color(50,50,50));
         snake.update();
-        
-        if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) <= 0)
-        {
-            std::cout<<"snake above screen" << std::endl;
-            snake.setHeadPosition('Y', window.getSize().y - snake.getSnakeHead().getSize().y);
-        }
-        
-        if((snake.getSnakeHead().getPosition().y) + (snake.getSnakeHead().getSize().y/2) >= window.getSize().y)
-        {
-            snake.setHeadPosition('Y',0);
-        }
-        
-        if((snake.getSnakeHead().getPosition().x) + (snake.getSnakeHead().getSize().x/2) <= 0)
-        {
-            snake.setHeadPosition('X',window.getSize().x - snake.getSnakeHead().getSize().x);
-        }
-        
-        if((snake.getSnakeHead().getPosition().x) + (snake.getSnakeHead().getSize().x/2) >= window.getSize().x)
-        {
-            std::cout<< "snake off right edge " << std::endl;
-            snake.setHeadPosition('X',0);
-        }
+        checkBounds(window.getSize(), &snake);
         
         window.draw(food.getShape());
         window.draw(snake.getSnakeHead());

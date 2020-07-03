@@ -34,17 +34,28 @@ void checkBounds(sf::Vector2u windowSize, Snake* snake)
         }
 }
 
+//
+bool checkSnakeCollision(Snake* snake){
+    for(bodyCell cell : snake->getSnakeBody()){
+        if(snake->getSnakeHead().getGlobalBounds().intersects(cell.getShape().getGlobalBounds())){
+            std::cout<<"Game over" << std::endl;
+            return true;
+        }
+    }
+        return false;
+}
 
 int main(){
     std::cout <<"welcome to snake" << std::endl;
     sf::RenderWindow window(sf::VideoMode(640,480),"Snake!");
 
+    bool gameOver = false;
     window.setFramerateLimit(60);
     
     Snake snake; 
     Food food(sf::Vector2f(150,220));
     snake.changeDirection(sf::Vector2f(1,0));
-    while (window.isOpen())
+    while (window.isOpen() && !gameOver)
     {
         sf::Event event;
         while(window.pollEvent(event)){
@@ -83,9 +94,11 @@ int main(){
         snake.update();
         checkBounds(window.getSize(), &snake);
         
+       gameOver = checkSnakeCollision(&snake);
+
         if(snake.getSnakeHead().getGlobalBounds().intersects(food.getShape().getGlobalBounds())){
             food.setPosition(sf::Vector2f(std::rand() % window.getSize().x + 1,std::rand() % window.getSize().y));
-            snake.increaseSpeed();
+//            snake.increaseSpeed();
             snake.grow();
         }
 

@@ -11,9 +11,10 @@ private:
     std::vector<bodyCell> snakeBody;
     sf::RectangleShape snakeHead;
     sf::Vector2f position;
+    const sf::Vector2f snakeSize = sf::Vector2f(10,10);
     sf::Vector2f previousPosition;
     sf::Vector2f direction;
-    float speed = 1.0f;
+    float speed = 10.0f;
     void move();
 public:
     void changeDirection(sf::Vector2f direction);

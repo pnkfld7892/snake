@@ -6,11 +6,12 @@ sf::Vector2f bodyCell::getPos(){
     return position;
 }
 
-sf::Vector2f bodyCell::getPreviousMove(){
-    return previousMove;
+sf::Vector2f bodyCell::getPreviousPosition(){
+    return previousPosition;
 }
 
 void bodyCell::setPosition(sf::Vector2f pos){
+    previousPosition = position;
    position =  pos;
    cellShape.setPosition(position);
 }

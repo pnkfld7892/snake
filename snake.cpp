@@ -37,10 +37,17 @@ void Snake::setHeadPosition(char axis,float pos){
 }
 
 void Snake::grow(){
-    snakeBody.push_back(bodyCell(sf::RectangleShape(sf::Vector2f(10,10))));
+    bodyCell cell = bodyCell(sf::RectangleShape(sf::Vector2f(10,10)));
+    cell.setPosition(previousPosition);
+    snakeBody.push_back(cell); 
+}
+
+sf::Vector2f Snake::getPreviousPosition(){
+    return previousPosition;
 }
 
 void Snake::update(){
+    previousPosition = position;
    position += (direction * speed);
    //position.x += 0.2f;
    snakeHead.setPosition(position);

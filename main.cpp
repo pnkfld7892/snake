@@ -1,7 +1,4 @@
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <stdlib.h>
 #include "direction.h"

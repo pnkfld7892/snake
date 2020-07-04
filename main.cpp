@@ -66,16 +66,21 @@ int main(){
                       case sf::Event::KeyPressed:
                           switch(event.key.code){
                               case sf::Keyboard::Up:
-                                  snake.changeDirection(direction["Up"]);
+                                  if(snake.getDirection() != direction["Down"])
+                                        snake.changeDirection(direction["Up"]);
                                     break;
                               case sf::Keyboard::Down:
-                                  snake.changeDirection(direction["Down"]);
+                                    if(snake.getDirection() != direction["Up"])
+                                        snake.changeDirection(direction["Down"]);
                                     break;
                               case sf::Keyboard::Left:
-                                  snake.changeDirection(direction["Left"]);
+                                    if(snake.getDirection() != direction["Right"]){
+                                        snake.changeDirection(direction["Left"]);
+                                    }
                                     break;
                               case sf::Keyboard::Right:
-                                  snake.changeDirection(direction["Right"]);
+                                    if(snake.getDirection() != direction["Left"])
+                                        snake.changeDirection(direction["Right"]);
                                     break;
                               case sf::Keyboard::Escape:
                               case sf::Keyboard::Q:

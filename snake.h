@@ -20,6 +20,7 @@ public:
     void changeDirection(sf::Vector2f direction);
     sf::Vector2f getPreviousPosition();
     void setHeadPosition(char axis,float pos);
+    sf::Vector2f getDirection();
     void update();
     void grow();
     void increaseSpeed();
